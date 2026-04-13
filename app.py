@@ -1,12 +1,13 @@
 from flask import Flask, render_template, request
 import random
+import os
 
 app = Flask(__name__)
 
 def generate_questions(notes, difficulty):
     notes = notes.lower()
 
-    # Pick topic
+    # detect topic
     if "photosynthesis" in notes:
         topic = "photosynthesis"
     elif "force" in notes:
@@ -18,12 +19,12 @@ def generate_questions(notes, difficulty):
     else:
         topic = "the main concept"
 
-    # Difficulty templates
+    # difficulty-based templates
     if difficulty == "easy":
         templates = [
             "What is {topic}?",
             "Define {topic}.",
-            "What does {topic} do?"
+            "State one fact about {topic}."
         ]
     elif difficulty == "medium":
         templates = [
@@ -34,13 +35,12 @@ def generate_questions(notes, difficulty):
     else:  # hard
         templates = [
             "Analyse the importance of {topic} in living systems.",
-            "Compare and evaluate {topic} with another biological process.",
-            "Explain in detail the mechanisms behind {topic}."
+            "Evaluate the role of {topic} in science.",
+            "Explain in detail how {topic functions and why it matters."
         ]
 
-    # Generate multiple questions
     questions = []
-    for _ in range(3):  # 3 questions per session
+    for _ in range(3):
         q = random.choice(templates).format(topic=topic)
         questions.append(q)
 
@@ -62,4 +62,4 @@ def home():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
