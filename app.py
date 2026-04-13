@@ -36,7 +36,7 @@ def generate_questions(notes, difficulty):
         templates = [
             "Analyse the importance of {topic} in living systems.",
             "Evaluate the role of {topic} in science.",
-            "Explain in detail how {topic functions and why it matters."
+            "Explain in detail how {topic} functions and why it matters."
         ]
 
     questions = []
