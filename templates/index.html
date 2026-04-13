@@ -1,27 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>AI Study App (Demo)</title>
+    <title>AI Exam Generator</title>
 </head>
 <body>
 
-<h1>AI Study App (UI Demo)</h1>
+<h1>AI Exam Generator</h1>
 
 <form method="POST">
     <textarea name="notes" rows="6" cols="60" placeholder="Enter study notes..."></textarea>
     <br><br>
-    <button type="submit">Generate</button>
+
+    <label>Difficulty:</label>
+    <select name="difficulty">
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+    </select>
+
+    <br><br>
+    <button type="submit">Generate Questions</button>
 </form>
 
 <hr>
 
-{% if question %}
-<h2>Question:</h2>
-<p>{{ question }}</p>
-{% endif %}
-
-{% if feedback %}
-<h3>{{ feedback }}</h3>
+{% if questions %}
+<h2>Generated Questions:</h2>
+<ol>
+    {% for q in questions %}
+        <li>{{ q }}</li>
+    {% endfor %}
+</ol>
 {% endif %}
 
 </body>
